@@ -1,0 +1,530 @@
+/* ═══════════════════════════════════════════════
+   Property Environmental Report — Styles
+   ═══════════════════════════════════════════════ */
+
+/* ─── RESET & BASE ─── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:         #e5e0d8;
+  --bg-light:   #eceae4;
+  --bg-dark:    #d5d0c8;
+  --surface:    #eae6e0;
+  --text:       #1a1a18;
+  --text-muted: #6b6862;
+  --accent:     #c0392b;
+  --accent-dim: #a83225;
+  --green:      #27ae60;
+  --blue:       #2c7be5;
+  --orange:     #e67e22;
+
+  --shadow-out:
+    6px 6px 14px rgba(0,0,0,.12),
+    -6px -6px 14px rgba(255,255,255,.65);
+  --shadow-in:
+    inset 4px 4px 10px rgba(0,0,0,.1),
+    inset -4px -4px 10px rgba(255,255,255,.55);
+  --shadow-sm:
+    3px 3px 8px rgba(0,0,0,.09),
+    -3px -3px 8px rgba(255,255,255,.55);
+
+  --radius: 20px;
+  --radius-sm: 12px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── LAYOUT ─── */
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 60px 28px 100px;
+}
+
+/* ─── HEADER ─── */
+header { margin-bottom: 56px; }
+header .step-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+header h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(38px, 6vw, 56px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+header .subtitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 14px;
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+/* ─── NEUMORPHIC CARD ─── */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-out);
+  padding: 36px 32px;
+  margin-bottom: 32px;
+  animation: cardIn .5s ease both;
+}
+.card + .card { animation-delay: .08s; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.card-title .num {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  background: var(--text);
+  color: var(--bg);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─── FORM ELEMENTS ─── */
+.field { margin-bottom: 20px; }
+.field label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.field input, .field select {
+  width: 100%;
+  padding: 14px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-in);
+  outline: none;
+  transition: box-shadow .2s;
+}
+.field input:focus {
+  box-shadow: var(--shadow-in), 0 0 0 2px var(--accent);
+}
+.field input::placeholder {
+  color: var(--text-muted);
+  opacity: .6;
+}
+
+/* ─── RADIUS DIAL ─── */
+.radius-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.radius-row input[type=range] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: var(--bg-dark);
+  border-radius: 3px;
+  box-shadow: var(--shadow-in);
+  outline: none;
+}
+.radius-row input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--shadow-out);
+  cursor: pointer;
+  border: 2px solid var(--bg-dark);
+  transition: box-shadow .15s;
+}
+.radius-row input[type=range]::-webkit-slider-thumb:hover {
+  box-shadow: var(--shadow-out), 0 0 0 3px rgba(192,57,43,.2);
+}
+.radius-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 26px;
+  font-weight: 500;
+  min-width: 72px;
+  text-align: right;
+}
+.radius-val span { font-size: 12px; color: var(--text-muted); }
+
+/* ─── BUTTONS ─── */
+.btn-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+}
+.btn {
+  flex: 1;
+  padding: 16px 28px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all .18s;
+}
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  box-shadow: var(--shadow-out);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 8px 8px 18px rgba(0,0,0,.16), -6px -6px 14px rgba(255,255,255,.6);
+}
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-in);
+}
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+.btn-secondary:hover { box-shadow: var(--shadow-out); }
+.btn-icon {
+  flex: none;
+  padding: 10px 18px;
+  font-size: 11px;
+}
+
+/* ─── LOADING ─── */
+.loader {
+  display: none;
+  margin: 32px auto;
+  text-align: center;
+}
+.loader.visible { display: block; }
+.loader .spinner {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--shadow-out);
+  margin: 0 auto 14px;
+  position: relative;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.loader .spinner::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--accent);
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse {
+  0%, 100% { box-shadow: var(--shadow-out); }
+  50%      { box-shadow: var(--shadow-sm); }
+}
+.loader p {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ─── RESULTS ─── */
+#results { display: none; }
+#results.visible { display: block; }
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.result-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 32px;
+  font-weight: 400;
+}
+.result-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.result-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.result-coords {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+/* ─── FACILITY ROWS ─── */
+.facility {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: start;
+  animation: facilityIn .35s ease both;
+}
+.facility:nth-child(n) { animation-delay: calc(var(--i, 0) * 40ms); }
+
+@keyframes facilityIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.facility-name {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.facility-name a {
+  color: var(--blue);
+  font-size: 11px;
+  text-decoration: none;
+  margin-left: 6px;
+}
+.facility-id {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.facility-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.badge-epa  { background: rgba(192,57,43,.1); color: var(--accent); }
+.badge-usgs { background: rgba(44,123,229,.1); color: var(--blue); }
+
+.facility-dist { text-align: right; }
+.facility-dist .miles {
+  font-family: 'DM Mono', monospace;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+}
+.facility-dist .unit {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.facility-dir {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: var(--shadow-in);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: 6px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 48px 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* Distance proximity indicators */
+.facility.proximity-close  { border-left: 3px solid var(--accent); }
+.facility.proximity-medium { border-left: 3px solid var(--orange); }
+.facility.proximity-far    { border-left: 3px solid var(--green); }
+
+/* Distance legend */
+.distance-legend {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.distance-legend .dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.dot-close  { background: var(--accent); }
+.dot-medium { background: var(--orange); }
+.dot-far    { background: var(--green); }
+
+/* ─── MAP ─── */
+#map-container {
+  margin-bottom: 24px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+#map {
+  height: 380px;
+  width: 100%;
+  background: var(--bg-dark);
+}
+/* Fix Leaflet font issues */
+.leaflet-container {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+}
+
+/* ─── GEOCODE-ONLY RESULT ─── */
+.geocode-result {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 24px 28px;
+  margin-top: 20px;
+  display: none;
+}
+.geocode-result.visible { display: block; animation: cardIn .35s ease both; }
+.geocode-result h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+.geo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.geo-item label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.geo-item value {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* ─── ERROR ─── */
+.error-msg {
+  background: rgba(192,57,43,.08);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--accent-dim);
+  margin-top: 16px;
+  display: none;
+}
+.error-msg.visible { display: block; animation: cardIn .25s ease; }
+
+/* ─── DISCLAIMER ─── */
+.disclaimer {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: rgba(44,123,229,.06);
+  border-radius: var(--radius-sm);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.disclaimer a { color: var(--blue); }
+
+/* ─── FOOTER ─── */
+footer {
+  text-align: center;
+  padding: 40px 0 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .page { padding: 36px 16px 60px; }
+  .card { padding: 24px 20px; }
+  .geo-grid { grid-template-columns: 1fr; }
+  .btn-row { flex-direction: column; }
+  #map { height: 260px; }
+  .result-actions { flex-wrap: wrap; }
+}
+
+/* ─── PRINT ─── */
+@media print {
+  body { background: #fff; color: #000; font-size: 12px; }
+  .page { max-width: 100%; padding: 20px; }
+  .card, .loader, #btn-geocode, #btn-report,
+  .btn-row, .radius-row, .field input,
+  .result-actions, #map-container { display: none !important; }
+  #results { display: block !important; }
+  .facility {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .disclaimer { background: #f5f5f5; }
+  footer { display: none; }
+}
