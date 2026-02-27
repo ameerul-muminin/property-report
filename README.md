@@ -1,4 +1,4 @@
-# Property Environmental Report
+# 🗺 Property Environmental Report
 
 A FastAPI web application that geocodes U.S. property addresses and generates environmental reports by querying **EPA ECHO** and **USGS Water Services** for nearby facilities.
 
